@@ -1,113 +1,186 @@
-import Image from "next/image";
+import { GlobeIcon } from "lucide-react";
+import { Merriweather, Bitter } from 'next/font/google';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Section from '@/components/resume-section';
+import ProjectCard from '@/components/project-card';
+import CommandMenu from '@/components/command-menu';
+import ResumeLinkButton from "@/components/resume-link";
+import { processResumeExperienceBullet } from "@/lib/utils";
+import { RESUME_DATA as resume } from "@/resume-data";
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['700', '900']
+})
+
+const bitter = Bitter({
+  subsets: ['latin'],
+  weight: ['700', '800', '900']
+})
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main className='container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16'>
+			<section className='mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6'>
+				<div className='flex items-center justify-between'>
+					<div className='flex-1 space-y-1.5'>
+						<h1 className={`text-2xl ${bitter.className} font-extrabold`}>{resume.name}</h1>
+						<p className='max-w-md text-pretty font-mono text-sm text-muted-foreground'>
+							{resume.about}
+						</p>
+						<p className='max-w-md items-center text-pretty font-mono text-xs text-muted-foreground'>
+							<a
+								className='inline-flex gap-x-1.5 align-baseline leading-none hover:underline'
+								href={resume.locationLink}
+								target='_blank'
+								rel='noreferrer'
+							>
+								<GlobeIcon className='size-3' />
+								{resume.location}
+							</a>
+						</p>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+						<div className="flex flex-row print:flex-col gap-x-1 font-mono text-sm text-muted-foreground">
+              {resume.links.map((link) => <ResumeLinkButton key={link.name} {...link} />)}
+            </div>
+					</div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+					<a href={resume.links.find((link) => link.name === 'Portfolio')!.url} target='_blank' rel='noreferrer'>
+						<Avatar className='size-28 rounded-lg'>
+							<AvatarImage alt={resume.name} src={resume.avatar} />
+							<AvatarFallback className='font-mono font-bold rounded-lg'>{resume.initials}</AvatarFallback>
+						</Avatar>
+					</a>
+				</div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+				<Section>
+					<h2 className='text-xl font-bold'>About</h2>
+					<p className='text-pretty font-mono text-sm text-gray-700'>{resume.summary}</p>
+				</Section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+				<Section>
+					<h2 className='text-xl font-bold'>Work Experience</h2>
+					{resume.experience.map((work) => {
+						return (
+							<Card key={work.company}>
+								<CardHeader className="p-0">
+									<div className='flex items-center justify-between gap-x-2 text-base'>
+										<h3 className='inline-flex items-center justify-center gap-x-1 font-semibold leading-none'>
+											{work.link ? (
+												<a
+													className='hover:underline'
+													href={work.link}
+													target='_blank'
+													rel='noreferrer'
+												>
+													{work.company}
+												</a>
+											) : (
+												<p>{work.company}</p>
+											)}
+										</h3>
+										<div className='text-sm tabular-nums text-neutral-500'>
+											{work.timeline}
+										</div>
+									</div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+									<h4 className='font-mono text-sm leading-none'>{work.title}</h4>
+								</CardHeader>
+								<CardContent className='mt-2 p-0 text-xs'>
+									<ul>
+										{work.bullets.map((item, index) => (
+											<li 
+                        key={index} 
+                        className='mb-1' 
+                        dangerouslySetInnerHTML={{ __html: `• ${processResumeExperienceBullet(item)}` }}
+                      />
+										))}
+									</ul>
+								</CardContent>
+
+                <div className='mt-3 flex flex-wrap gap-1'>
+                  {work.skills.map((skill) => (
+                    <Badge variant='secondary' className='text-xs' key={skill}>
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+							</Card>
+						)
+					})}
+				</Section>
+
+				<Section>
+					<h2 className='text-xl font-bold'>Education</h2>
+					{resume.education.map((education) => {
+						return (
+							<Card key={education.name}>
+								<CardHeader className="p-0">
+									<div className='flex items-center justify-between gap-x-2 text-base'>
+										<h3 className='font-semibold leading-none'>{education.name}</h3>
+										<div className='text-sm tabular-nums text-neutral-500'>
+											{education.timeline}
+										</div>
+									</div>
+								</CardHeader>
+								<div className='mt-2 font-mono text-sm leading-none'>{education.degree}</div>
+                <div className="mt-3 flex flex-row flex-wrap gap-1">
+                  {education.courses.map((course) => <Badge key={course} variant={'secondary'}>{course}</Badge>)}
+                </div>
+							</Card>
+						)
+					})}
+				</Section>
+
+				<Section>
+					<h2 className='text-xl font-bold'>Skills</h2>
+					<div className='flex flex-wrap gap-1'>
+						{resume.skills.map((skill) => {
+							return <Badge key={skill}>{skill}</Badge>
+						})}
+					</div>
+				</Section>
+
+				<Section className='print-force-new-page scroll-mb-16'>
+					<h2 className='text-xl font-bold'>Projects</h2>
+					<div className='-mx-3 grid grid-cols-1 gap-3 print:grid-cols-2 print:gap-2 md:grid-cols-2'>
+						{resume.projects.map((project) => {
+							return (
+								<ProjectCard
+									key={project.title}
+									title={project.title}
+									description={project.description}
+									tags={project.techstack}
+									link={project.link}
+								/>
+							)
+						})}
+					</div>
+				</Section>
+			</section>
+
+			<CommandMenu
+				links={[
+					{
+            title: 'Portfolio Site',
+            url: resume.links.find((l) => l.name === 'Portfolio')!.url,
+					},
+					{
+            title: 'LinkedIn',
+            url: resume.links.find((l) => l.name === 'LinkedIn')!.url,
+					},
+          {
+            title: 'GitHub',
+            url: resume.links.find((l) => l.name === 'GitHub')!.url,
+          },
+          {
+            title: 'Email',
+            url: resume.links.find((l) => l.name === 'Email')!.url,
+          },
+				]}
+			/>
+		</main>
   );
 }
