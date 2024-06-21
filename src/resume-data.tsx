@@ -67,8 +67,10 @@ export const RESUME_DATA: ResumeData = {
   ],
   skills: [
     'Astro', 'TypeScript', 'Next.js', 'React', 'Node.js', 'Golang',
-    'Python', 'FastAPI/Flask/Django', 'PostgreSQL', 'MongoDB', 'Redis',
-    'AWS', 'GCP', 'Vercel'
+    'Python', 'FastAPI/Flask/Django', 'SQLAlchemy', 'NumPy', 'Pandas',
+    'Spring Boot', 'Hibernate', 'JUnit', 'Gradle',
+    'PostgreSQL', 'MongoDB', 'Redis',
+    'Docker', 'Kubernetes', 'AWS', 'GCP', 'Vercel',
   ],
   projects: [
     {
