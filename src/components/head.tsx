@@ -2,7 +2,7 @@ import { type Metadata } from 'next'
 
 const NAME = 'Charles Buffington'
 const SITE_URL = 'https://cv.cbuff.dev'
-const OPENGRAPH_IMAGE = `${SITE_URL}/` // TODO: add opengraph image
+const OPENGRAPH_IMAGE = `${SITE_URL}/avatar.jpeg`
 
 export function Head({ metadata }: { metadata: Metadata }) {
 	return (
