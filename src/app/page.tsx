@@ -26,7 +26,7 @@ export default function Home() {
 			<section className='mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6'>
 				<div className='flex items-center justify-between'>
 					<div className='flex-1 space-y-1.5'>
-						<h1 className={`text-2xl ${bitter.className} font-extrabold`}>{resume.name}</h1>
+						<h1 className={`text-xl xs:text-2xl ${bitter.className} font-extrabold whitespace-nowrap`}>{resume.name}</h1>
 						<p className='max-w-md text-pretty font-mono text-sm text-muted-foreground'>
 							{resume.about}
 						</p>
@@ -57,7 +57,7 @@ export default function Home() {
 
 				<Section>
 					<h2 className='text-xl font-bold'>About</h2>
-					<p className='text-pretty font-mono text-sm text-gray-700'>{resume.summary}</p>
+					<p className='text-xs xs:text-sm text-pretty font-mono text-gray-700'>{resume.summary}</p>
 				</Section>
 
 				<Section>
