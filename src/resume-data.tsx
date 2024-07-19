@@ -85,7 +85,7 @@ export const RESUME_DATA: ResumeData = {
     {
       title: 'Fuuty.gg',
       description: 'A soccer knowledge gaming platform with an engaging, user-friendly experience',
-      link: 'https://fuuty.gg',
+      link: '',
       techstack: [
         'Next.js', 'Prisma ORM', 'tRPC', 'TanStack Query', 'MongoDB', 'TailwindCSS',
         'Google Analytics', 'AWS S3', 'Vercel'

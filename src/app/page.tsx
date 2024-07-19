@@ -27,12 +27,12 @@ export default function Home() {
 				<div className='flex items-center justify-between'>
 					<div className='flex-1 space-y-1.5'>
 						<h1 className={`text-xl xs:text-2xl ${bitter.className} font-extrabold whitespace-nowrap`}>{resume.name}</h1>
-						<p className='max-w-md text-pretty font-mono text-sm text-muted-foreground'>
+						<p className='max-w-md text-pretty font-mono text-sm leading-none text-muted-foreground'>
 							{resume.about}
 						</p>
 						<p className='max-w-md items-center text-pretty font-mono text-xs text-muted-foreground'>
 							<a
-								className='inline-flex gap-x-1.5 align-baseline leading-none hover:underline'
+								className='mt-1 inline-flex gap-x-1.5 align-baseline leading-none hover:underline'
 								href={resume.locationLink}
 								target='_blank'
 								rel='noreferrer'
@@ -57,7 +57,7 @@ export default function Home() {
 
 				<Section>
 					<h2 className='text-xl font-bold'>About</h2>
-					<p className='text-xs xs:text-sm text-pretty font-mono text-gray-700'>{resume.summary}</p>
+					<p className='sm:text-sm text-xs text-pretty font-mono text-gray-700'>{resume.summary}</p>
 				</Section>
 
 				<Section>
@@ -86,10 +86,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<h4 className='font-mono text-sm leading-none'>{work.title}</h4>
+									<h4 className='font-mono text-xs leading-none'>{work.title}</h4>
 								</CardHeader>
 								<CardContent className='mt-2 p-0 text-xs'>
-									<ul>
+									<ul className="space-y-1">
 										{work.bullets.map((item, index) => (
 											<li 
                         key={index} 
@@ -125,7 +125,7 @@ export default function Home() {
 										</div>
 									</div>
 								</CardHeader>
-								<div className='mt-2 font-mono text-sm leading-none'>{education.degree}</div>
+								<div className='mt-2 font-mono text-xs leading-none'>{education.degree}</div>
                 <div className="mt-3 flex flex-row flex-wrap gap-1">
                   {education.courses.map((course) => <Badge key={course} variant={'secondary'}>{course}</Badge>)}
                 </div>
