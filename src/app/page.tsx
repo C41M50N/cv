@@ -55,10 +55,10 @@ export default function Home() {
 					</a>
 				</div>
 
-				<Section>
+				{/* <Section>
 					<h2 className='text-xl font-bold'>About</h2>
 					<p className='sm:text-sm text-xs text-pretty font-mono text-gray-700'>{resume.summary}</p>
-				</Section>
+				</Section> */}
 
 				<Section>
 					<h2 className='text-xl font-bold'>Work Experience</h2>
@@ -88,16 +88,17 @@ export default function Home() {
 
 									<h4 className='font-mono text-xs leading-none'>{work.title}</h4>
 								</CardHeader>
-								<CardContent className='mt-2 p-0 text-xs'>
-									<ul className="space-y-1">
+								<CardContent className='mt-2 p-0 text-sm'>
+									<div className="flex flex-col space-y-1">
 										{work.bullets.map((item, index) => (
-											<li 
-                        key={index} 
-                        className='mb-1' 
-                        dangerouslySetInnerHTML={{ __html: `• ${processResumeExperienceBullet(item)}` }}
-                      />
+											<div key={`work-bullet-${index}`} className="ml-0.5 flex flex-row space-x-2">
+												<span className="font-bold">•</span>
+												<span>
+													{processResumeExperienceBullet(item)}
+												</span>
+											</div>
 										))}
-									</ul>
+									</div>
 								</CardContent>
 
                 <div className='mt-3 flex flex-wrap gap-1'>
@@ -120,9 +121,9 @@ export default function Home() {
 								<CardHeader className="p-0">
 									<div className='flex items-center justify-between gap-x-2 text-base'>
 										<h3 className='font-semibold leading-none'>{education.name}</h3>
-										<div className='text-sm tabular-nums text-neutral-500'>
+										{/* <div className='text-sm tabular-nums text-neutral-500'>
 											{education.timeline}
-										</div>
+										</div> */}
 									</div>
 								</CardHeader>
 								<div className='mt-2 font-mono text-xs leading-none'>{education.degree}</div>

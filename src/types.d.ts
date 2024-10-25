@@ -18,7 +18,7 @@ export type ResumeExperience = {
   title: string;
   company: string;
   timeline: string;
-  link: string;
+  link?: string;
   bullets: Array<string>;
   skills: Array<string>;
 }
