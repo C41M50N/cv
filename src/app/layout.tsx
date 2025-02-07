@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react"
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { Head } from "@/components/head";
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       )}
     >
       <Head metadata={metadata} />
+      <Analytics />
       <body>
         <TooltipProvider>
           {children}
